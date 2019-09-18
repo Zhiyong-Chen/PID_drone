@@ -18,12 +18,12 @@ anti_windup = 0
 
 for x in range(1,2001): 
 	pos_error_sum = pos_error_sum + pos_error 				#誤差總和
-	Kpwork = Kp * pos_error 								#Proportional
+	Kpwork = Kp * pos_error 						#Proportional
 	Kiwork = Ki * pos_error_sum - anti_windup				#Integral
 	Kdwork = Kd * (pos_error - prepos_error)				#Derivative
-	prepos_error = pos_error 								#Last error
+	prepos_error = pos_error 						#Last error
 
-	ouput = np.clip(Kpwork + Kiwork + Kdwork,-0.3,0.3)		#anti_windup	
+	ouput = np.clip(Kpwork + Kiwork + Kdwork,-0.3,0.3)			#anti_windup	
 	anti_windup = Kpwork + Kiwork + Kdwork - ouput 			
 
 	Kiwork = Ki * pos_error_sum - anti_windup				#再對積分器anti一次
